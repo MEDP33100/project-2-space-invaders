@@ -1,0 +1,23 @@
+<h1 style="text-align: center;">NASA NEO Asteroid Info</h1>
+
+<div id="filters" style="margin-bottom: 20px; text-align: center;">
+  <button id="filter-closest">Closest (Top 4)</button>
+  <button id="filter-farthest">Farthest (Top 4)</button>
+  <button id="filter-top100">Top 100 (Closest → Farthest)</button>
+  <button id="filter-smallest">Smallest (Top 4)</button>
+  <button id="filter-largest">Largest (Top 4)</button>
+</div>
+
+<div class="scroll-wrapper">
+  <div class="space-container">
+    <img id="earth" src="/images/earth.png" alt="Earth">
+    <div id="asteroid-space">
+      <img id="asteroid" src="/images/asteroid.png" alt="Asteroid">
+    </div>
+  </div>
+</div>
+
+<div id="distance-display">Click on an asteroid to see the distance!</div>
+
+<h2 id="asteroid-heading">4 Closest Asteroids</h2>
+<ul id="asteroid-list"></ul>
