@@ -1,4 +1,4 @@
-const API_KEY = "u3Kk3TUsGANe6OMlaIMQNgjLWZlSMohrDK9DbXdO"; 
+const API_KEY = "u3Kk3TUsGANe6OMlaIMQNgjLWZlSMohrDK9DbXdO";
 const today = new Date();
 const startDate = new Date(today);
 startDate.setDate(today.getDate() - 6); // updated time range for more variety max
@@ -34,10 +34,19 @@ fetch(
       };
     });
 
-    
     const distances = asteroidsWithDistance.map((a) => a.distance);
     const minDistance = Math.min(...distances);
     const maxDistance = Math.max(...distances);
+
+    // color coding
+    function getDistanceColor(distance, min, max) {
+      const ratio = (distance - min) / (max - min);
+      if (ratio < 0.2) return "red";
+      if (ratio < 0.4) return "orange";
+      if (ratio < 0.6) return "yellow";
+      if (ratio < 0.8) return "green";
+      return "blue";
+    }
 
     const normalize = (dist) => {
       const minGap = 15;
@@ -94,6 +103,14 @@ fetch(
           ).textContent = `Distance from Earth: ${item.distance.toLocaleString()} km`;
         });
 
+        // color coding
+        const color = getDistanceColor(item.distance, minDistance, maxDistance);
+        li.style.backgroundColor = color;
+        li.style.color = "white"; // white background for color coded text (for orange/yellow readability)
+        li.style.padding = "8px";
+        li.style.borderRadius = "6px";
+        li.style.marginBottom = "10px"; //spacing between items
+
         ul.appendChild(li);
       });
     };
@@ -121,17 +138,16 @@ fetch(
       displayList(top100, "Top 100 Asteroids (Closest to Farthest)");
     });
 
-// added event listeners for size filters
+    // added event listeners for size filters
 
     document.getElementById("filter-smallest").addEventListener("click", () => {
       displayList(smallest, "Smallest Asteroids (Top 4)");
-      console.log('Getting results (smallest)...')
+      console.log("Getting results (smallest)...");
     });
 
     document.getElementById("filter-largest").addEventListener("click", () => {
       displayList(largest, "Largest Asteroids (Top 4)");
-      console.log('Getting results (largest)...');
+      console.log("Getting results (largest)...");
     });
-
   })
   .catch((error) => console.error("Error fetching asteroid data:", error));
