@@ -15,27 +15,27 @@ ul {
 li {
     margin-bottom: 10px;
 }
-  
+
+#asteroid-heading {
+    text-align: center;
+}
+
 .space-container {
-    /* display: flex;
-    align-items: center;
-    transition: all 0.3s ease;
-    margin-bottom: 20px;
-    position: relative;
-    height: 100px;
-    overflow-x: hidden; */
     display: flex;
     align-items: center;
     transition: all 0.3s ease;
     height: 100px;
-    min-width: 100vw; /* ensures content can move outside viewport */
+    min-width: 100vw;
     position: relative;
+    padding: 1%;
 }
 
 .scroll-wrapper {
     overflow-x: auto;
     width: 100%;
     margin-bottom: 20px;
+    background-color: #000000;
+    border: 0.25em double #303f9f;
 }
   
 #earth, #asteroid {
@@ -54,7 +54,7 @@ li {
     font-size: 1.2rem;
   }
 
-  #filters button {
+#filters button {
     margin: 0 10px;
     padding: 10px 15px;
     font-size: 1rem;
@@ -126,4 +126,15 @@ li {
     justify-content: center;
     align-items: center;
     font-size: 30px;
+}
+
+/* List styling */
+.centerList {
+  width:100%;
+  display: flex;
+  justify-content: center;
+}
+#asteroid-list {
+  border: solid #000000;
+  padding: 2%;
 }
