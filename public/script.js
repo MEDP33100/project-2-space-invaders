@@ -11,6 +11,19 @@ fetch(
 )
   .then((response) => response.json())
   .then((data) => {
+
+    //Page variables - Bry
+    let currentPage = 1;
+    const itemsPerPage = 10;
+    let pageList = [];
+
+    //Function for creating pages - Bry
+    function pageCreate(list, page) {
+        const start = (page - 1) * itemsPerPage;
+        const end = page * itemsPerPage;
+        return list.slice(start, end);
+    }
+
     const neos = Object.values(data.near_earth_objects).flat();
 
     const asteroidsWithDistance = neos.map((asteroid) => {
@@ -74,12 +87,26 @@ fetch(
     const largest = sortedBySize.slice(-4).reverse(); // biggest first
 
     // display list function
-    const displayList = (list, headingText) => {
+    //Added "paginated = false" for page creation - Bry
+    const displayList = (list, headingText, paginated = false) => {
       const ul = document.getElementById("asteroid-list");
       const heading = document.getElementById("asteroid-heading");
+      //Variables for page creation - Bry
+      const pagination = document.getElementById("pageControls");
+      const pageIndication = document.getElementById("pageIndicator");
 
       ul.innerHTML = "";
       heading.textContent = headingText;
+
+      //Code for pagination, showing what page user is on. If it isn't applicable, page buttons don't show up - Bry
+      if (paginated) {
+        pageList = list;
+        list = pageCreate(list, currentPage);
+        pagination.style.display = "block";
+        pageIndication.textContent = `Page ${currentPage} of ${Math.ceil(pageList.length / itemsPerPage)}`;
+      } else {
+        pagination.style.display = "none";
+      }
 
       list.forEach((item) => {
         const li = document.createElement("li");
@@ -135,7 +162,8 @@ fetch(
     });
 
     document.getElementById("filter-top100").addEventListener("click", () => {
-      displayList(top100, "Top 100 Asteroids (Closest to Farthest)");
+      currentPage = 1;
+      displayList(top100, "Top 100 Asteroids (Closest to Farthest)", true);
     });
 
     // added event listeners for size filters
@@ -148,6 +176,21 @@ fetch(
     document.getElementById("filter-largest").addEventListener("click", () => {
       displayList(largest, "Largest Asteroids (Top 4)");
       console.log("Getting results (largest)...");
+    });
+
+    //Events for clicking on next and previous buttons - Bry
+    document.getElementById("prevPage").addEventListener("click", () => {
+      if (currentPage > 1) {
+        currentPage--;
+        displayList(pageList, "Top 100 Asteroids (Closest to Farthest)", true);
+      }
+    });
+    document.getElementById("nextPage").addEventListener("click", () => {
+      const maxPage = Math.ceil(pageList.length / itemsPerPage);
+      if (currentPage < maxPage) {
+        currentPage++;
+        displayList(pageList, "Top 100 Asteroids (Closest to Farthest)", true);
+      }
     });
   })
   .catch((error) => console.error("Error fetching asteroid data:", error));

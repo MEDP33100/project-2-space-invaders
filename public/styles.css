@@ -1,3 +1,7 @@
+html {
+    background-image: url("images/background.jpg");
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 20px;
@@ -16,8 +20,34 @@ li {
     margin-bottom: 10px;
 }
 
+.asteroidHead_Wrap {
+    width:100%;
+    display: flex;
+    justify-content: center;
+}
 #asteroid-heading {
     text-align: center;
+    color: #ffffff;
+    border-radius: 3%;
+    border: 0.25em double #303f9f;
+    background-color: #000000;
+    padding: 1%;
+}
+
+.displayWrap {
+    width:100%;
+    display: flex;
+    justify-content: center;
+}
+#distance-display {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    color: #ffffff;
+    background-color: #202063;
+    border: 0.25em double #000000;
+    padding: 1%;
 }
 
 .space-container {
@@ -46,13 +76,6 @@ li {
 #asteroid-space {
     transition: margin-left 0.4s ease;
 }
-
-#distance-display {
-    text-align: center;
-    font-weight: bold;
-    margin-bottom: 20px;
-    font-size: 1.2rem;
-  }
 
 #filters button {
     margin: 0 10px;
@@ -137,4 +160,31 @@ li {
 #asteroid-list {
   border: solid #000000;
   padding: 2%;
+  background-color: #ffffff;
+  background-image: url("images/listbackground.jpg");
+}
+
+/* Flipping pages/Page related styling */
+#pageControls {
+    text-align: center;
+    margin-top: 10px;
+    display: none;
+}
+#pageIndicator {
+    color: #ffffff;
+}
+#prevPage, #nextPage {
+    background-color: #816cf8;
+    transition: background-color 0.3s ease;
+    margin: 0 10px;
+    padding: 10px 15px;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+}
+
+#prevPage:hover, #nextPage:hover {
+    color: #ffffff;
+    background-color: #6150be;
 }
