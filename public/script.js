@@ -11,7 +11,6 @@ fetch(
 )
   .then((response) => response.json())
   .then((data) => {
-
     //Page variables - Bry
     let currentPage = 1;
     const itemsPerPage = 10;
@@ -19,9 +18,9 @@ fetch(
 
     //Function for creating pages - Bry
     function pageCreate(list, page) {
-        const start = (page - 1) * itemsPerPage;
-        const end = page * itemsPerPage;
-        return list.slice(start, end);
+      const start = (page - 1) * itemsPerPage;
+      const end = page * itemsPerPage;
+      return list.slice(start, end);
     }
 
     const neos = Object.values(data.near_earth_objects).flat();
@@ -52,24 +51,84 @@ fetch(
     const maxDistance = Math.max(...distances);
 
     // color coding
-    function getDistanceColor(distance, min, max) {
-      const ratio = (distance - min) / (max - min);
-      if (ratio < 0.2) return "red";
-      if (ratio < 0.4) return "orange";
-      if (ratio < 0.6) return "yellow";
-      if (ratio < 0.8) return "green";
-      return "blue";
+    function getDistanceColor(distance) {
+      for (const range of colorRanges) {
+        if (distance >= range.min && distance <= range.max) {
+          return range.color;
+        }
+      }
+      return "#ffffff"; 
     }
 
+
+    // normalize function for margin spacing
+    // updated bc asteroid went off screen after some ui changes - sam
     const normalize = (dist) => {
       const minGap = 15;
-      const maxGap = 100;
+      const maxGap = 85; // changed from 100 to 85 to prevent going off screen
       return (
         ((dist - minDistance) / (maxDistance - minDistance)) *
           (maxGap - minGap) +
         minGap
       );
     };
+
+
+    // generate dynamic distance legend - sam
+    const range = maxDistance - minDistance;
+
+    const colorRanges = [
+      {
+        color: "#FFF761",
+        label: "Closest",
+        min: minDistance,
+        max: minDistance + range * 0.2,
+      },
+      {
+        color: "#FFC14B",
+        label: "",
+        min: minDistance + range * 0.2,
+        max: minDistance + range * 0.4,
+      },
+      {
+        color: "#FF8A5C",
+        label: "",
+        min: minDistance + range * 0.4,
+        max: minDistance + range * 0.6,
+      },
+      {
+        color: "#F24B7F",
+        label: "",
+        min: minDistance + range * 0.6,
+        max: minDistance + range * 0.8,
+      },
+      {
+        color: "#B13687",
+        label: "Farthest",
+        min: minDistance + range * 0.8,
+        max: maxDistance,
+      },
+    ];
+
+    const legendUl = document.querySelector("#legend ul");
+    legendUl.innerHTML = ""; // clear existing legend items
+
+    colorRanges.forEach((range) => {
+      const li = document.createElement("li");
+
+      const colorBox = document.createElement("span");
+      colorBox.style.backgroundColor = range.color;
+
+      const labelText = document.createTextNode(
+        `${range.label ? range.label + ": " : ""}${Math.round(
+          range.min
+        ).toLocaleString()} – ${Math.round(range.max).toLocaleString()} km`
+      );
+
+      li.appendChild(colorBox);
+      li.appendChild(labelText);
+      legendUl.appendChild(li);
+    });
 
     // sorting lists
     const sortedByDistance = [...asteroidsWithDistance].sort(
@@ -85,6 +144,19 @@ fetch(
     );
     const smallest = sortedBySize.slice(0, 4);
     const largest = sortedBySize.slice(-4).reverse(); // biggest first
+
+
+    // turn asteroid li text black when bckgrnd color is light
+    function getTextColorForBackground(hex) {
+      const rgb = hex
+        .replace("#", "")
+        .match(/.{2}/g)
+        .map((c) => parseInt(c, 16));
+      const brightness = (rgb[0] * 299 + rgb[1] * 587 + rgb[2] * 114) / 1000;
+      return brightness > 160 ? "black" : "white";
+    }
+
+
 
     // display list function
     //Added "paginated = false" for page creation - Bry
@@ -103,7 +175,9 @@ fetch(
         pageList = list;
         list = pageCreate(list, currentPage);
         pagination.style.display = "block";
-        pageIndication.textContent = `Page ${currentPage} of ${Math.ceil(pageList.length / itemsPerPage)}`;
+        pageIndication.textContent = `Page ${currentPage} of ${Math.ceil(
+          pageList.length / itemsPerPage
+        )}`;
       } else {
         pagination.style.display = "none";
       }
@@ -131,9 +205,10 @@ fetch(
         });
 
         // color coding
-        const color = getDistanceColor(item.distance, minDistance, maxDistance);
+        const color = getDistanceColor(item.distance);
+        const textColor = getTextColorForBackground(color);
         li.style.backgroundColor = color;
-        li.style.color = "white"; // white background for color coded text (for orange/yellow readability)
+        li.style.color = textColor;
         li.style.padding = "8px";
         li.style.borderRadius = "6px";
         li.style.marginBottom = "10px"; //spacing between items
