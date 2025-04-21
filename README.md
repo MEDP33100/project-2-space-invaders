@@ -2,7 +2,7 @@
 # MEDP 33100 Project 2: Data Visualization
 ## **Project Members**
 
-_List the people a part of this group._
+Maxim Tyan, Samantha Stokes, Bryan Briones
 
 ## **Link to Live Page**
 
@@ -10,11 +10,11 @@ _Include a link to the live version of the project hosted on Glitch._
 
 ## **Project Overview**
 
-_Briefly describe the concept of your project._
+A website to show and filter the different asteroids by size and distance relative to earth. 
 
 ## **Features**
 
-_List the key features of the project (the three distinct types of user interactions)._
+Lists closest and fathest asteroids, smallest and largest, as well as the top 100 "near" earth, with a display at the top to show relative distance in animation.
 
 ## **Technologies Used**
 
