@@ -1,0 +1,277 @@
+/* CSS done by Max, Sam, and Bryan */
+/* Organized by Bryan */
+
+/* START regular element styling */
+html {
+    background-image: url("images/background.jpg");
+}
+* {
+    font-family: "Outfit", sans-serif;
+}
+body {
+    margin: 20px;
+}
+h2 {
+    margin-top: 30px;
+}
+ul {
+    list-style: none;
+    padding: 0;
+}
+li {
+    margin-bottom: 10px;
+}
+/* END regular element styling */
+
+/* START header font & styling*/
+.honk-header {
+    font-family: "Honk", system-ui;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings: "MORF" 25, "SHLN" 50;
+    margin: 0;
+}
+#header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+}
+/* END header font & styling*/
+
+/* START filter buttons styling */
+.game-buttons button {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    background-color: #000;
+    color: #ffffff;
+    border: 3px solid #ffffff;
+    padding: 15px 20px;
+    margin: 20px 0;
+    box-shadow: 4px 4px 0 #ff00aa;
+    transition: all 0.2s ease;
+}
+.game-buttons button:hover {
+    transform: translateY(-2px);
+    box-shadow: 4px 4px 0 #fff700;
+    background-color: #111;
+    cursor: pointer;
+}
+/* END filter buttons styling */
+
+/* START visualization display & styling */
+.scroll-wrapper {
+    overflow-x: auto;
+    width: 100%;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    background-color: #000000;
+    box-shadow: 0 0 15px 5px #fff700;
+    border: none;
+    border-radius: 12px;
+}
+.space-container {
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+    height: 100px;
+    min-width: 100vw;
+    position: relative;
+    padding: 1%;
+}
+#asteroid-space {
+    transition: margin-left 0.4s ease;
+}
+/* Images */
+#earth, #asteroid {
+    width: 80px;
+    height: auto;
+}
+#asteroid:hover {
+    cursor: pointer;
+}
+/* END visualization display & styling */
+
+/* START left & right panel styling */
+.left-panel, .right-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.left-panel #distance-display, .right-panel #asteroid-heading {
+    padding: 15px 10px;
+    font-size: 1rem;
+    text-align: center;
+    margin: 0;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Press Start 2P', cursive;
+}
+/* END left and right panel styling */
+
+/* START distance display */
+#distance-display {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 20px;
+    font-size: 1rem;
+    color: #ffffff;
+    background-color: #000000;
+    box-shadow: 0 0 15px 5px #303f9f99;
+    border: none;
+    border-radius: 12px;
+    padding: 2%;
+    font-family: 'Press Start 2P', cursive;
+}
+/* END distance display */
+
+/* START legend styling */
+/* color key */
+#legend {
+    top: 20px;
+    left: 20px;
+    padding: 10px;
+    background: #000000;
+    box-shadow: 0 0 15px 5px #303f9f99;
+    border: none;
+    border-radius: 12px;
+    color: #ffffff;
+    width: 150px;
+    z-index: 999;
+    float: right;
+}
+/* legend elements */
+#legend h3 {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    text-align: center;
+}
+#legend ul {
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+#legend {
+    background: #000000;
+    box-shadow: 0 0 15px 5px #303f9f99;
+    border: none;
+    border-radius: 12px;
+    color: #ffffff;
+    width: 100%;
+    max-width: 300px;
+    padding: 20px;
+    font-family: 'Press Start 2P', cursive;
+}
+#legend li {
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+}
+#legend span {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+    border-radius: 3px;
+}
+/* END legend styling */
+
+/* START asteroid heading */
+#asteroid-heading {
+    text-align: center;
+    color: #ffffff;
+    box-shadow: 0 0 15px 5px rgba(48, 63, 159, 0.6);
+    border: none;
+    border-radius: 12px;
+    background-color: #000000;
+    padding: 3%;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 20px;
+}
+/* END asteroid heading */
+
+/* START asteroid list styling */
+#asteroid-list:hover {
+    cursor: pointer;
+}
+#asteroid-list {
+    flex: 1;
+    min-height: 200px;
+    box-shadow: 0 0 15px 5px #303f9f99;
+    border: none;
+    border-radius: 12px;
+    padding: 2%;
+    background-color: #ffffff;
+    background-image: url("images/listbackground.jpg");
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+/* END asteroid list styling */
+
+/* START pagination related styling */
+#pageControls {
+    text-align: center;
+    margin-top: 10px;
+    display: none;
+}
+#pageIndicator {
+    color: #ffffff;
+}
+#prevPage, #nextPage {
+    background-color: #816cf8;
+    transition: background-color 0.3s ease;
+    margin: 0 10px;
+    padding: 10px 15px;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 0 15px 5px #303f9f99;
+    border: none;
+    border-radius: 12px;
+}
+#prevPage:hover, #nextPage:hover {
+    color: #ffffff;
+    background-color: #6150be;
+}
+/* END pagination related styling */
+
+/* START console layout - sam */
+.console-panel {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px;
+  background: #111;
+  border: 1px solid #ff00aa;
+  box-shadow: 0 0 25px #ff00aa;
+  margin-top: 30px;
+}
+/* END console layout */
+
+/* old buttons */
+/* #filters button {
+  margin: 0 10px;
+  padding: 10px 15px;
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 0 0 15px 5px rgba(48, 63, 159, 0.6);
+  border: none;
+  border-radius: 12px;
+  background-color: #816cf8;
+  color: black;
+  transition: background-color 0.3s ease;
+}
+
+#filters button:hover {
+  color: #ffffff;
+  background-color: #6150be;
+  box-shadow: 0 0 15px 5px #ffffffa0;
+} */

@@ -5,7 +5,7 @@
  */
 
 var app = require('../app');
-var debug = require('debug')('project-2-template:server');
+var debug = require('debug')('project-2-git:server');
 var http = require('http');
 
 /**
@@ -28,6 +28,10 @@ var server = http.createServer(app);
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
+// console log added here -- sam
+server.on("listening", () => {
+  console.log(`Server is running on http://localhost:${port}`);
+});
 
 /**
  * Normalize a port into a number, string, or false.
@@ -67,11 +71,9 @@ function onError(error) {
     case 'EACCES':
       console.error(bind + ' requires elevated privileges');
       process.exit(1);
-      break;
     case 'EADDRINUSE':
       console.error(bind + ' is already in use');
       process.exit(1);
-      break;
     default:
       throw error;
   }
@@ -88,3 +90,5 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+
+

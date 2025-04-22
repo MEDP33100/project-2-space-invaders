@@ -1,2 +1,51 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+<div id="header">
+  <h1 class="honk-header">NASA NEO Asteroid Info</h1>
+</div>
+
+<div class="game-buttons" style="text-align: center; margin-top: 20px;">
+  <button id="filter-closest">Closest</button>
+  <button id="filter-farthest">Farthest</button>
+  <button id="filter-top100">Top 100</button>
+  <button id="filter-smallest">Smallest</button>
+  <button id="filter-largest">Largest</button>
+</div>
+
+<!-- console-style layout -->
+<div class="scroll-wrapper">
+  <div class="space-container">
+    <img id="earth" src="/images/earth.png" alt="Earth">
+    <div id="asteroid-space">
+      <img id="asteroid" src="/images/asteroid.png" alt="Asteroid">
+    </div>
+  </div>
+</div>
+
+<div class="console-panel">
+  <div class="left-panel">
+    <div id="distance-display">Click on an asteroid to see the distance.</div>
+
+    <div id="legend">
+      <h3>Distance Legend</h3>
+      <ul>
+        <li><span style="background:red"></span> Closest</li>
+        <li><span style="background:orange"></span></li>
+        <li><span style="background:yellow"></span></li>
+        <li><span style="background:green"></span></li>
+        <li><span style="background:blue"></span> Farthest</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="right-panel">
+    <h2 id="asteroid-heading">4 Closest Asteroids</h2>
+    <ul id="asteroid-list"></ul>
+
+    <div id="pageControls">
+      <button id="prevPage">Previous</button>
+      <span id="pageIndicator"></span>
+      <button id="nextPage">Next</button>
+    </div>
+  </div>
+</div>
+
+
