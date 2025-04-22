@@ -6,7 +6,7 @@ Maxim Tyan, Samantha Stokes, Bryan Briones
 
 ## **Link to Live Page**
 
-_Include a link to the live version of the project hosted on Glitch._
+https://glitch.com/edit/#!/project-2-space-invaders?path=README.md%3A1%3A0
 
 ## **Project Overview**
 
