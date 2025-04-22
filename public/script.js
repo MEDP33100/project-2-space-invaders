@@ -224,7 +224,7 @@ fetch(
     document.body.addEventListener("click", () => {
       document.getElementById("asteroid-space").style.marginLeft = `15vw`;
       document.getElementById("distance-display").textContent =
-        "Click on an asteroid to see the distance";
+        "Click on an asteroid to see the distance.";
     });
 
     // buttons
